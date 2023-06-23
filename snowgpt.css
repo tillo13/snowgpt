@@ -1,0 +1,408 @@
+/* don't remove this section ever, mostly for chatGPT, but this is Servicenow's color setup that everything must align:
+#eaebec
+#3c3d55
+#d01d25
+#82858e
+#9798a4
+#626365
+#892f3b
+#663644
+#6c6c7c
+*/
+
+/* General styles */
+body {
+    background-color: #eaebec;
+    color: #3c3d55;
+  }
+  
+  /* Textarea styles for the main-content */
+  .question-textarea {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .question-textarea:focus {
+    outline: 2px solid #d01d25;
+  }
+  
+  /* Slider label styles */
+  .slider-label {
+    display: inline-block;
+    width: 100px;
+  }
+  
+  /* Switch styles for input-container */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #82858e;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 1px;
+    right: 1px;
+    bottom: 0px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #6c6c7c;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #6c6c7c;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  /* New switch styles for .cl-switch */
+  .cl-switch {
+    display: inline-block;
+  }
+  
+  .cl-switch input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+  }
+  
+  .cl-switch .switcher {
+    display: inline-block;
+    border-radius: 100px;
+    width: 35px;
+    height: 15px;
+    background-color: #82858e;
+    position: relative;
+    box-sizing: border-box;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  .cl-switch .switcher:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #eaebec;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    margin-top: -2.5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    margin-right: 0;
+    transition: all 0.2s;
+  }
+  
+  .cl-switch .switcher:active:before {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 0 10px rgba(63, 81, 181, 0.3);
+    transition: all, 0.1s;
+  }
+  
+  .cl-switch input[type="checkbox"]:checked + .switcher {
+    background-color: #6c6c7c;
+  }
+  
+  .cl-switch input[type="checkbox"]:checked + .switcher:before {
+    left: 100%;
+    margin-left: -20px;
+    background-color: #6c6c7c;
+  }
+  
+  /* Button styles for .submit-btn-container */
+  .btn-primary {
+    background-color: #3c3d55;
+    border-color: #3c3d55;
+    width: 100%; /* Make the button stretch to the full width */
+  }
+  
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active {
+    background-color: #626365;
+    border-color: #626365;
+  }
+  .btn-primary i {
+    margin-right: 5px;
+  }
+  
+  /* Loading spinner styles */
+  .loading-spinner {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .fa-spinner {
+    font-size: 18px;
+  }
+  
+  .elapsed-time {
+    margin-left: 5px;
+    font-size: 14px;
+  }
+  
+  @keyframes spinner-colors {
+    0% {
+      color: #eaebec;
+    }
+    20% {
+      color: #3c3d55;
+    }
+    40% {
+      color: #d01d25;
+    }
+    60% {
+      color: #82858e;
+    }
+    80% {
+      color: #9798a4;
+    }
+    100% {
+      color: #eaebec;
+    }
+  }
+  
+  .loading-spinner .fa-spinner {
+    animation: spinner-colors 5s linear infinite;
+  }
+  
+  /* Spinner message styles */
+  .spinner-message {
+    color: #9798A4;
+    margin-left: 5px;
+  }
+  
+  /* lds-roller spinner styles */
+  .lds-roller {
+    display: inline-block;
+    position: relative;
+    width: 17px;
+    height: 17px;
+    animation: lds-roller 1.2s linear infinite;
+  }
+  
+  .lds-roller:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 50%;
+  }
+  
+  .lds-roller:before {
+    border-top-color: #eaebec;
+    border-bottom-color: #3c3d55;
+    animation: lds-roller-double-dots 1.2s linear infinite;
+  }
+  
+  .lds-roller:after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    animation: lds-roller-double-dots 1.2s linear infinite;
+    transform: rotate(45deg);
+  }
+  
+  .lds-roller:after {
+    border-top-color: #d01d25;
+    border-bottom-color: #82858e;
+  }
+  
+  @keyframes lds-roller-double-dots {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Response header styles */
+  .response-header {
+    font-weight: bold;
+    color: #d01d25;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+  }
+  
+  /* Response block styles */
+  .response-block {
+    margin-bottom: 20px;
+  }
+  
+  /* Boomi response styles */
+  .boomi-response {
+    background-color: #6c6c7c; /* Change the background color to a darker shade */
+    border: 1px solid #ccc;
+    padding: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 5px;
+    line-height: 1.5;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    color: #eaebec; /* Change the text color to a lighter shade for better contrast */
+  }
+  
+  /* Response time container styles */
+  .response-time-container {
+    text-align: right;
+  }
+  
+  /* Response time label styles */
+  .response-time-label {
+    font-size: 0.8em;
+    font-style: italic;
+    font-weight: bold;
+    color: #d01d25;
+  }
+  
+  /* Response time value styles */
+  .response-time-value {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #d01d25;
+  }
+  
+  /* hr styles */
+  hr {
+    border-top: 1px solid #ddd;
+  }
+  /* Button styles for the custom more-info button */
+  .btn-more-info {
+    background-color: #82858e;
+    border-color: #82858e;
+    color: #eaebec;
+    padding: 1px 10px; /* Adjust the padding to make the button thinner */
+  }
+  
+  .btn-more-info:hover,
+  .btn-more-info:focus,
+  .btn-more-info:active {
+    background-color: #626365;
+    border-color: #626365;
+    color: #eaebec;
+  }
+  /* Script Log response styles */
+  .script-log-response {
+    background-color: #e0e0e0; /* Change the background color to match the ServiceNow palette */
+    border: 1px solid #ccc;
+    padding: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 5px;
+    line-height: 1.5;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    color: #333;
+    font-size: 0.7em; /* Add this line to make the font size smaller */
+  }
+  /* Placeholder text color for the main-content textarea */
+  .form-control::placeholder {
+    color: #9798a4;
+  }
+  .settings-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .toggle-label {
+    cursor: pointer;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    gap: 10px; /* Add this line to create space between the label and the slider */
+  }
+  
+  .submit-btn-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Update the .question-textarea rule in your existing CSS */
+  .question-textarea {
+    background-color: #ffffff; /* Set the background color to white */
+    border: 1px solid #ccc;
+    min-height: 40px;
+    color: #333;
+  }
+  /* Add this media query at the end of your existing CSS */
+  @media (max-width: 767px) {
+    .settings-container {
+      flex-direction: column; /* Stack elements vertically */
+      align-items: flex-start;
+      gap: 10px; /* Add space between elements */
+    }
+  
+    .input-container {
+      margin-right: 0; /* Remove the right margin on mobile */
+      display: flex;
+      justify-content: space-between; /* Add this line to align the toggle to the right */
+      width: 100%; /* Add this line to make the input container take up the full width */
+    }
+  
+    .submit-btn-container .btn-primary {
+      width: 100%; /* Make the button stretch to the full width */
+    }
+  }
+  .loading-spinner-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
