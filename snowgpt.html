@@ -1,0 +1,86 @@
+<div class="main-content">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
+  <form ng-submit="$event.preventDefault()" class="form-horizontal well">
+    <div class="form-group">
+      <textarea class="form-control question-textarea" ng-model="c.data.query" ng-trim="false" ng-attr-placeholder="{{c.data.query === '' ? 'Type anything here you want to talk about...' : '' }}"></textarea>
+    </div>
+    <div class="form-group">
+      <div class="settings-container">
+        <div class="input-container">
+          <label for="google-search" class="toggle-label" data-toggle="tooltip" data-placement="top" data-original-title="Selecting this will use Boomi to search Google in real-time, and will take a bit longer, but will attempt real-time search.">Use Google?</label>
+          <div class="cl-switch">
+            <input type="checkbox" id="google-search" ng-model="c.data.google_search">
+            <label class="switcher" for="google-search"></label>
+          </div>
+        </div>
+        <div class="input-container">
+          <label for="gpt4" class="toggle-label" data-toggle="tooltip" data-placement="top" data-original-title="By default we will use GPT4 as it carries sentience better, but feel free to toggle to false to set gpt-3.5-turbo.">Use GPT4?</label>
+          <div class="cl-switch">
+            <input type="checkbox" id="gpt4" ng-model="c.data.use_gpt4">
+            <label class="switcher" for="gpt4"></label>
+          </div>
+        </div>
+        <div class="input-container">
+          <label for="test-mode" class="toggle-label" data-toggle="tooltip" data-placement="top" data-original-title="This will just send your input in to Boomi and immediately send something back to test bottlenecks. Also resets your sentience!">Test Mode</label>
+          <div class="cl-switch">
+            <input type="checkbox" id="test-mode" ng-model="c.data.test_mode">
+            <label class="switcher" for="test-mode"></label>
+          </div>
+        </div>
+        <div class="input-container">
+          <label for="reset-toggle" class="toggle-label" data-toggle="tooltip" data-placement="top" data-original-title="When you slide this, the page will reset, wiping all knowledge of previous conversations!">Start Over</label>
+          <div class="cl-switch">
+            <input type="checkbox" id="reset-toggle" ng-model="c.data.reset_page" ng-change="c.resetPage()">
+            <label class="switcher" for="reset-toggle"></label>
+          </div>
+        </div>
+      </div>
+     <div class="submit-btn-container">
+  <button type="button" class="btn btn-primary" ng-click="c.submit();" ng-disabled="c.data.loading">
+    <i class="fas fa-comment"></i>
+    <span ng-hide="c.data.loading">Ask ChatGPT</span>
+    <span ng-show="c.data.loading">Processing...</span>
+  </button>
+</div>
+<div ng-show="c.data.loading" class="loading-spinner-container"> <!-- Add this new container for the spinner, counter, and status updates -->
+  <div class="loading-spinner">
+    <div class="lds-roller">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <span class="elapsed-time">{{c.data.elapsedTime}}</span>
+    <span class="spinner-message">{{c.data.spinnerMessage}}</span>
+  </div>
+</div>
+      <p class="text-danger" ng-bind-html="c.data.warningMessage"></p>
+    </div>
+  </form>
+  <div class="well" ng-if="c.data.boomiResponses && c.data.boomiResponses[0].response">
+    <h3 class="response-header">${ChatGPT Log:}</h3>
+   <div ng-repeat="x in c.data.boomiResponses track by $index" class="response-block">
+  <i><b>Response #{{c.data.boomiResponses.length - $index}}</b> @{{x.timestamp}}</i><br> <!-- Display response number and timestamp -->
+  <strong>You said:</strong>
+
+  <textarea class="form-control question-textarea" readonly>{{x.question}}</textarea> <!-- Display the question asked -->
+  <strong>chatGPT (via Boomi) responded:</strong>
+  <pre class="boomi-response">{{x.response.to_servicenow}}</pre>
+  <div class="response-time-container">
+    <span class="response-time-label">Response Time:</span>
+    <span class="response-time-value">{{x.response.roundtrip_time}}</span>
+  </div>
+<button type="button" class="btn btn-more-info btn-sm" ng-click="x.showMoreInfo = !x.showMoreInfo"><i class="fas fa-plus"></i> Nerdy details</button>
+<div ng-show="x.showMoreInfo" class="more-info">
+  <strong>Boomi Process Log:</strong><br>
+  <pre class="script-log-response">{{x.response.script_log}}</pre>
+<strong>Running Sentience Characters:</strong> <i>{{x.response.running_sentience_characters}}</i><br>
+  <strong>Current Cost Estimate:</strong> <i>{{x.response.current_cost_estimate}}</i><br>
+  <strong>Running Token Count:</strong> <i>{{x.response.running_token_count}}</i><br>
+  <strong>Iteration Counter:</strong> <i>{{x.response.iteration_counter}}</i><br>
+  <strong>Toggle Info:</strong> <i>{{c.data.toggleInfoString}}</i><br>
+    <strong>Working Sentience:</strong> <i>{{x.response.working_sentience}}</i><br>
+  
+</div>
+  <hr ng-if="$index < c.data.boomiResponses.length - 1"> <!-- Add a divider between each response, except for the last one -->
+</div>
+  </div>
+</div>
+</div>
